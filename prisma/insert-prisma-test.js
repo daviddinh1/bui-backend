@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   const testInsert = await prisma.test.create({
     data: {
-      testComment: "second insert!!!!",
+      testComment: "third insert!!!!",
     },
   });
 

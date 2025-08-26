@@ -1,22 +1,38 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
-
+  schemas   = ["auth", "public"]  // both schemas visible to Prisma
 }
 
 model Test {
-  id        String   @id @default(uuid())
+  id          String  @id @default(uuid())
   testComment String?
+
+  @@schema("public")
+}
+
+model Profile {
+  id         String   @id @db.Uuid          // matches auth.users.id
+  email      String?                          // optional: add @db.Text if you prefer
+  full_name  String?                          // optional: add @db.Text if you prefer
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+
+  @@map("profiles")
+  @@schema("public")
+}
+
+// Minimal, ignored mirror so cross-schema FK is valid.
+// Prisma won't generate a client for this model.
+model AuthUser {
+  id String @id @db.Uuid
+
+  @@map("users")
+  @@schema("auth")
+  @@ignore
 }

@@ -20,6 +20,7 @@
   "homepage": "https://github.com/daviddinh1/bui-backend#readme",
   "dependencies": {
     "@prisma/client": "^6.13.0",
+    "@supabase/supabase-js": "^2.56.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "prisma": "^6.13.0"

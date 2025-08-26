@@ -27,7 +27,7 @@ async function signUpUser() {
   return data.user; // so other files can use the created user
 }
 
-for later pass in req here
+// for later pass in req here
 async function signInUser() {
   const email = "admin@gmail.com";
   const password = "Passw0rd!123";
